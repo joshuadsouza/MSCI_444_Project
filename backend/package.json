@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "MSCI 444 Course Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuadsouza/MSCI_444_Project.git"
+  },
+  "author": "Joshua, Shaiba, Buse, Yash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuadsouza/MSCI_444_Project/issues"
+  },
+  "homepage": "https://github.com/joshuadsouza/MSCI_444_Project#readme"
+}
