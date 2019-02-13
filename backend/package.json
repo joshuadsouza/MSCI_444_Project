@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/joshuadsouza/MSCI_444_Project/issues"
   },
-  "homepage": "https://github.com/joshuadsouza/MSCI_444_Project#readme"
+  "homepage": "https://github.com/joshuadsouza/MSCI_444_Project#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
