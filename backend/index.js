@@ -18,3 +18,6 @@ app.listen(port, () => {
 
 var grade_router = require("./grades/grade.js");
 app.use('/grades', grade_router);
+
+var rest_router = require("./restaurant/restaurant.js");
+app.use('/restaurant', rest_router);

@@ -10,9 +10,7 @@ class NavBar extends Component {
                     <nav>
                         <ul>
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to="/grades">Grades</Link></li>
-                            <li><Link to="/course-reminders">Course Reminders</Link></li>
-                            <li><Link to="/bus-schedule">Bus Schedule</Link></li>
+                            <li><Link to="/grades">Course Information</Link></li>
                             <li><Link to="/restaurants">Restaurants</Link></li>
                         </ul>
                     </nav>

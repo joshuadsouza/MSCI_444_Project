@@ -6,6 +6,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
+import CurrentGrade from './GradeComponents/CurrentGrade';
+import Reminder from './GradeComponents/Reminder';
 
 class Grades extends Component {
     //States for the Component - Include Student Name, Grades, Weight, and Due_Date
@@ -171,6 +173,7 @@ class Grades extends Component {
                 }
             
             </Grid>
+
             {
             this.state.courseLoad &&
             <Grid item>
@@ -186,9 +189,21 @@ class Grades extends Component {
                 </form>
             </Grid>
             }
+
+             {/*BELOW IS THE COMPONENT FOR THE CURRENT GRADE IN THE COURSE */}
+        
+            <Grid item>
+            <CurrentGrade showReminder={this.state.gradeLoad} grade_data={this.state.grades}></CurrentGrade>
+            </Grid>
+
+            {/*BELOW IS THE COMPONENT FOR THE COURSE REMINDERS */}
+            <Grid item>
+                <Reminder showReminder={this.state.gradeLoad} grade_data={this.state.grades} courseData={this.state.courseID}/>
+            </Grid>
+
             {
                 this.state.gradeLoad &&
-                <Table striped bordered hover>
+                <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>Grade Type</TableCell>
