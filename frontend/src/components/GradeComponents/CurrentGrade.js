@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 class CurrentGrade extends Component {
     constructor(props){
@@ -76,7 +77,9 @@ class CurrentGrade extends Component {
             <Grid container>
             { this.state.gradeLoad &&
             <Grid item>
-            <h3>Current grade in the course is {this.state.calculated_grade} %</h3>
+            <Typography variant="h5" color="secondary">
+            Current grade in the course is {this.state.calculated_grade} %
+            </Typography>
             </Grid>
             }
             </Grid>

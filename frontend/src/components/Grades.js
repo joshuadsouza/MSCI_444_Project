@@ -8,6 +8,40 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import CurrentGrade from './GradeComponents/CurrentGrade';
 import Reminder from './GradeComponents/Reminder';
+import Typography from '@material-ui/core/Typography';
+import 'typeface-roboto';
+import Select from '@material-ui/core/Select';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import theme from './theme';
+
+const styles = () => ({
+    titlePadding: {
+      paddingBottom: '1rem',
+    },
+    containerPadding: {
+      padding: '5rem'
+    },
+    cardMargin: {
+      margin: '0.5rem',
+      maxWidth: 300
+    },
+    selectStyle: {
+        minWidth: 150,
+        margin: '0.5rem'
+    },
+    buttonStyle: {
+        margin: '0.5rem'
+    },
+    textPadding: {
+        padding: '2.5rem'
+    }
+  });
 
 class Grades extends Component {
     //States for the Component - Include Student Name, Grades, Weight, and Due_Date
@@ -150,55 +184,100 @@ class Grades extends Component {
 
    //Render Function for UI
     render() {
-        return (
-            <Grid container direction="column" justify="space-evenly" alignItems="center">
-            <Grid item>
-                <h1>Grades Section</h1>
-            </Grid>
 
+        const { classes } = this.props;
+
+        return (
+            <MuiThemeProvider theme={theme}>
+            <Grid container direction="column" justify="center" alignItems="center" className={classes.containerPadding}>
+            <Grid item className={classes.titlePadding}>
+                <Typography variant="h2">
+                    Course Information
+                </Typography>
+            </Grid>
+            
+            <Grid item container direction="row" justify="center" alignItems="flex-start">
             <Grid item>
-           
-                <select value={this.state.studentID} onChange={this.handleSelectChange}>
+            <FormControl variant="outlined">
+            <InputLabel htmlFor="outlined-age-simple">
+                Student Name
+            </InputLabel>
+                <Select
+                    value={this.state.studentID}
+                    onChange={this.handleSelectChange}
+                    className={classes.selectStyle}
+                    input={
+                    <OutlinedInput
+                        labelWidth="100"
+                        name="Student Name"
+                        id="outlined-age-simple"
+                    />
+                    }
+                >   
                     {
                         this.state.student.map(function(item, i){
-                            return <option value={item.studentID}>{item.first_name} {item.last_name}</option>;
+                            return <MenuItem value={item.studentID}>{item.first_name} {item.last_name}</MenuItem>;
                         })
                     }
-                </select>
-            
-        
-                {
-                    !this.state.courseLoad &&
-                    <button onClick={this.selectStudentCourse}>Select Student</button>
-                }
+                </Select>
+            </FormControl>
+
+            <Button variant="contained" color="secondary" onClick={this.selectStudentCourse} className={classes.buttonStyle}>Select Student</Button>
             
             </Grid>
-
+            </Grid>
             {
             this.state.courseLoad &&
             <Grid item>
-                <form>
-                <select value={this.state.courseID} onChange={this.handleCourseSelect}>
+            <FormControl variant="outlined">
+            <InputLabel htmlFor="outlined-course-simple">
+                Course
+            </InputLabel>
+                <Select
+                    value={this.state.courseID}
+                    onChange={this.handleCourseSelect}
+                    className={classes.selectStyle}
+                    input={
+                    <OutlinedInput
+                        labelWidth="100"
+                        name="Course"
+                        id="outlined-course-simple"
+                    />
+                    }
+                >   
                     {
                         this.state.courses.map(function(item, i){
-                            return <option value={item.courseID}>{item.courseID}</option>
+                            return <MenuItem value={item.courseID}>{item.courseID}</MenuItem>;
                         })
                     }
-                </select>
-                <button onClick={this.selectCourse}>Select Course</button>
-                </form>
+                </Select>
+            </FormControl>
+            <Button variant="contained" color="secondary" onClick={this.selectCourse} className={classes.buttonStyle}>Select Course</Button>
             </Grid>
             }
 
-             {/*BELOW IS THE COMPONENT FOR THE CURRENT GRADE IN THE COURSE */}
-        
-            <Grid item>
-            <CurrentGrade showReminder={this.state.gradeLoad} grade_data={this.state.grades}></CurrentGrade>
-            </Grid>
 
             {/*BELOW IS THE COMPONENT FOR THE COURSE REMINDERS */}
+            <Grid item container>
+            {
+                this.state.gradeLoad &&
+                <Grid item>
+                <Typography variant="h5" className={classes.textPadding} color="secondary">
+                    Course Reminders
+                </Typography>
+                </Grid>
+            }
             <Grid item>
                 <Reminder showReminder={this.state.gradeLoad} grade_data={this.state.grades} courseData={this.state.courseID}/>
+            </Grid>
+            </Grid>
+
+             {/*BELOW IS THE COMPONENT FOR THE CURRENT GRADE IN THE COURSE */}
+        
+             <Grid item container direction="row" className={classes.textPadding}>
+             <Grid>
+            <CurrentGrade showReminder={this.state.gradeLoad} grade_data={this.state.grades}></CurrentGrade>
+            </Grid>
             </Grid>
 
             {
@@ -228,12 +307,10 @@ class Grades extends Component {
                     </TableBody>
                 </Table>
             }
-            <Grid item>
-            <Link to="/">Back</Link>
             </Grid>
-            </Grid>
+            </MuiThemeProvider>
         );
     }
 }
 
-export default Grades;
+export default withStyles(styles)(Grades);

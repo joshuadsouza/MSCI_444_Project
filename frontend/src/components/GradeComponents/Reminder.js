@@ -3,6 +3,15 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = () => ({
+    cardMargin: {
+      margin: '0.5rem',
+      maxWidth: 200,
+      minWidth: 200
+    }
+  });
 
 class Reminder extends Component{
     constructor(props){
@@ -51,6 +60,7 @@ class Reminder extends Component{
     }
 
     render(){
+        const { classes } = this.props;
         return (
             <Grid container>
             { 
@@ -58,7 +68,7 @@ class Reminder extends Component{
                 this.state.courseData.map((item, i) => {
                     return(
                         <Grid item>
-                        <Card>
+                        <Card className={classes.cardMargin}>
                             <CardContent>
                                 <Typography color="textSecondary">
                                     {this.state.courseID}
@@ -84,4 +94,4 @@ class Reminder extends Component{
     }
 }
 
-export default Reminder;
+export default withStyles(styles)(Reminder);

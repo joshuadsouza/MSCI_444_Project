@@ -7,8 +7,8 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <NavBar />
-        <Main />
+      <NavBar />
+      <Main />
       </BrowserRouter>
     );
   }

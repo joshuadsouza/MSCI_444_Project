@@ -5,6 +5,38 @@ import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
+import Select from '@material-ui/core/Select';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import theme from './theme';
+
+const styles = () => ({
+    titlePadding: {
+      paddingBottom: '1rem',
+    },
+    containerPadding: {
+      padding: '5rem'
+    },
+    cardMargin: {
+      margin: '0.5rem',
+      maxWidth: 300
+    },
+    selectStyle: {
+        minWidth: 150,
+        margin: '0.5rem'
+    },
+    buttonStyle: {
+        margin: '0.5rem'
+    },
+    textPadding: {
+        padding: '2.5rem'
+    }
+  });
 
 class Restaurants extends Component {
     //Class States
@@ -79,6 +111,7 @@ class Restaurants extends Component {
     }
 
     render(){
+        const { classes } = this.props;
         return (
             <Grid container direction="column"  justify="space-evenly" alignItems="center">
             <Grid item>
@@ -86,14 +119,30 @@ class Restaurants extends Component {
             </Grid>
 
             <Grid item>
-                <select value={this.state.rest_type} onChange={this.handleRestType}>
+            <FormControl variant="outlined">
+            <InputLabel htmlFor="outlined-course-simple">
+                Course
+            </InputLabel>
+                <Select
+                    value={this.state.rest_type} 
+                    onChange={this.handleRestType}
+                    className={classes.selectStyle}
+                    input={
+                    <OutlinedInput
+                        labelWidth="100"
+                        name="Course"
+                        id="outlined-course-simple"
+                    />
+                    }
+                >   
                     {
                         this.state.rest_types.map(function(item, i){
-                            return <option value={item.restaurant_type}>{item.restaurant_type}</option>
+                            return <MenuItem value={item.restaurant_type}>{item.restaurant_type}</MenuItem>;
                         })
                     }
-                </select>
-                <button onClick={this.selectRestType}>Select Type</button>
+                </Select>
+            </FormControl>
+            <Button variant="contained" color="secondary" onClick={this.selectRestType} className={classes.buttonStyle}>Select Type</Button>
             </Grid>
 
             {
@@ -131,4 +180,4 @@ class Restaurants extends Component {
     }
 }
 
-export default Restaurants;
+export default withStyles(styles)(Restaurants);
